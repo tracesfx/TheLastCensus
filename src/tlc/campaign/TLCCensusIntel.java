@@ -177,6 +177,10 @@ public class TLCCensusIntel extends BaseIntelPlugin {
             }
         }
 
+        if (!TLCMem.tallyhouseIntact() && !TLCIds.STAGE_DONE.equals(stage)) {
+            info.addPara("The Tallyhouse no longer answers in the Bureau's name. Without the Registrar, the Grand Audit "
+                    + "cannot be completed.", Misc.getNegativeHighlightColor(), opad);
+        }
         if (TLCMem.flag(TLCIds.MEM_COMMISSIONER)) {
             info.addPara("As Commissioner, your fleet is never audited by Bureau Assessors.", g, opad);
         } else if (TLCMem.flag(TLCIds.MEM_ENUMERATOR)) {

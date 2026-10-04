@@ -142,9 +142,13 @@ public final class TLCInspectorGeneral {
         MemoryAPI mem = f.getMemoryWithoutUpdate();
         Misc.setFlagWithReason(mem, MemFlags.MEMORY_KEY_PURSUE_PLAYER, REASON, on, 1.5f);
         Misc.setFlagWithReason(mem, MemFlags.MEMORY_KEY_STICK_WITH_PLAYER_IF_ALREADY_TARGET, REASON, on, 1.5f);
+        // Same flags vanilla's HasslePlayerScript uses, so the fleet is not co-opted by other AI behaviour.
+        Misc.setFlagWithReason(mem, MemFlags.FLEET_BUSY, REASON, on, 1.5f);
         if (on) {
+            mem.set(MemFlags.FLEET_SPECIAL_ACTION, true, 1.5f);
             mem.set(MemFlags.FLEET_IGNORES_OTHER_FLEETS, true, 1.5f);
         } else {
+            mem.unset(MemFlags.FLEET_SPECIAL_ACTION);
             mem.unset(MemFlags.FLEET_IGNORES_OTHER_FLEETS);
         }
     }
@@ -212,7 +216,6 @@ public final class TLCInspectorGeneral {
             MemoryAPI mem = fleet.getMemoryWithoutUpdate();
             mem.set(TLCIds.MEM_IG_FLEET, true);
             mem.set(MemFlags.FLEET_FIGHT_TO_THE_LAST, true);
-            mem.set(MemFlags.MEMORY_KEY_NO_JUMP, true);
             Misc.makeImportant(fleet, REASON);
             fleet.setNoAutoDespawn(true);
             fleet.addEventListener(new TLCFleetListener(TLCFleetListener.KIND_IG));

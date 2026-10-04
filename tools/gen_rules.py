@@ -65,7 +65,8 @@ rule("tlc_auditRefuseWeakSel", "DialogOptionSelected", ["$option == tlc_auditRef
 
 # ============================================================================ THE REGISTRAR (Tallyhouse)
 rule("tlc_regOpt", "PopulateOptions",
-     ["$hasMarket", "$menuState == main", "$market.id == tlc_tallyhouse_market", "!$faction.isHostile"], [], "",
+     ["$hasMarket", "$menuState == main", "$market.id == tlc_tallyhouse_market", "$faction.id == tlc_bureau",
+      "!$faction.isHostile"], [], "",
      ["3:tlc_registrarOpen:Request an audience with the Registrar"])
 rule("tlc_regOpenSel", "DialogOptionSelected", ["$option == tlc_registrarOpen"],
      ["TLCRegistrarCMD show", "FireAll TLC_RegistrarOptions"])

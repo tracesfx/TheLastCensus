@@ -6,7 +6,8 @@
     "hullId": "tlc_tally",
     "hullMods": [
         "hardenedshieldemitter",
-        "unstable_injector"
+        "unstable_injector",
+        "auxiliarythrusters"
     ],
     "permaMods": [],
     "sMods": [],

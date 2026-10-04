@@ -39,6 +39,7 @@ MakeOtherFleetPreventDisengage hassle false",,cutCommLinkNoText:Cut the comm lin
 tlc_regOpt,PopulateOptions,"$hasMarket
 $menuState == main
 $market.id == tlc_tallyhouse_market
+$faction.id == tlc_bureau
 !$faction.isHostile",,,3:tlc_registrarOpen:Request an audience with the Registrar,
 tlc_regOpenSel,DialogOptionSelected,$option == tlc_registrarOpen,"TLCRegistrarCMD show
 FireAll TLC_RegistrarOptions",,,

@@ -680,6 +680,31 @@ for r, f in mod_json.items():
         err("%s: knows no mod hulls" % r)
     if (f["id"], "FACTION") not in ALL["desc"]:
         err("%s: no FACTION description" % r)
+    # every weapon/hullmod on the faction's own role variants must be known to the faction
+    kw_tags = set(f.get("knownWeapons", {}).get("tags", []))
+    kw = set(f.get("knownWeapons", {}).get("weapons", []))
+    for wid, wd in WDATA.items():
+        if kw_tags & {t.strip() for t in wd.get("tags", "").split(",")}:
+            kw.add(wid)
+    km_tags = set(f.get("knownHullMods", {}).get("tags", []))
+    km = set(f.get("knownHullMods", {}).get("hullMods", []))
+    for mid, md in ALLHMOD.items():
+        if km_tags & {t.strip() for t in md.get("tags", "").split(",")}:
+            km.add(mid)
+    role_variants = set()
+    for vs in mod_json.get("data/world/factions/default_ship_roles.json", {}).values():
+        role_variants |= set(vs.keys())
+    for r2, v in mod_json.items():
+        if not r2.endswith(".variant") or v.get("variantId") not in role_variants:
+            continue
+        builtins = set(HULLSPEC.get(v["hullId"], ({}, {}))[1].get("builtInMods", []))
+        for g in v.get("weaponGroups", []):
+            for wid in g.get("weapons", {}).values():
+                if wid not in kw:
+                    err("%s: role variant %s uses weapon %s the faction does not know" % (r, v["variantId"], wid))
+        for m in v.get("hullMods", []):
+            if m not in km and m not in builtins:
+                err("%s: role variant %s uses hullmod %s the faction does not know" % (r, v["variantId"], m))
 fl = mod("data", "world", "factions", "factions.csv")
 if os.path.exists(fl):
     for d in csv_dicts(fl):

@@ -93,7 +93,10 @@
             "hightech_bp",
             "missile_bp"
         ],
-        "weapons": []
+        "weapons": [
+            "heavymauler",
+            "heavyblaster"
+        ]
     },
     "priorityWeapons": {
         "tags": [

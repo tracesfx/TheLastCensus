@@ -1,6 +1,6 @@
 {
     "displayName": "Standard",
-    "fluxCapacitors": 13,
+    "fluxCapacitors": 15,
     "fluxVents": 30,
     "goalVariant": true,
     "hullId": "tlc_magistrate",

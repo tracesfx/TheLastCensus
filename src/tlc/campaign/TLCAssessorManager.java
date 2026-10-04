@@ -10,12 +10,15 @@ import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
+import com.fs.starfarer.api.combat.ShipVariantAPI;
+import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.fleets.FleetFactoryV3;
 import com.fs.starfarer.api.impl.campaign.fleets.FleetParamsV3;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
 import com.fs.starfarer.api.impl.campaign.ids.Personalities;
 import com.fs.starfarer.api.impl.campaign.ids.Ranks;
+import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
@@ -68,6 +71,7 @@ public class TLCAssessorManager implements EveryFrameScript {
                 maintain();
             }
             updateHassleFlags();
+            cleanupSeizedTags();
             TLCInspectorGeneral.advance();
             TLCQuest.advance();
         } catch (Throwable t) {
@@ -211,6 +215,21 @@ public class TLCAssessorManager implements EveryFrameScript {
             } else {
                 Misc.giveStandardReturnToSourceAssignments(f);
             }
+        }
+    }
+
+    /**
+     * A Writ of Seizure only guarantees recovery from the battle it was served in. Once a seized ship has joined the
+     * player's fleet, strip the tags again so it does not stay always-recoverable forever.
+     */
+    private void cleanupSeizedTags() {
+        CampaignFleetAPI pf = Global.getSector().getPlayerFleet();
+        if (pf == null) return;
+        for (FleetMemberAPI m : pf.getFleetData().getMembersListCopy()) {
+            ShipVariantAPI v = m.getVariant();
+            if (v == null || !v.hasTag(TLCIds.SEIZED_TAG)) continue;
+            v.removeTag(TLCIds.SEIZED_TAG);
+            v.removeTag(Tags.VARIANT_ALWAYS_RECOVERABLE);
         }
     }
 

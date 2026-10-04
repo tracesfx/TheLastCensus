@@ -14,7 +14,7 @@ public class TLCFleetListener implements FleetEventListener {
     public static final String KIND_IG = "ig";
     public static final String KIND_RELAY = "relay";
 
-    private final String kind;
+    private String kind;
 
     public TLCFleetListener(String kind) {
         this.kind = kind;

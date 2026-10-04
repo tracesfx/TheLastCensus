@@ -1,6 +1,6 @@
 {
     "displayName": "Standard",
-    "fluxCapacitors": 7,
+    "fluxCapacitors": 10,
     "fluxVents": 10,
     "goalVariant": true,
     "hullId": "tlc_tally",

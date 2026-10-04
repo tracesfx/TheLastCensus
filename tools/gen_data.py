@@ -53,7 +53,7 @@ def write_json(rel, obj):
 DIV = {"FRIGATE": 0.08, "DESTROYER": 0.06, "CRUISER": 0.05, "CAPITAL_SHIP": 0.04}
 SHIPS = [
     dict(name="Tally", id="tlc_tally", designation="Enumerator", size="FRIGATE", system="maneuveringjets",
-         fp=5, hp=1400, armor=150, flux=2400, diss=160, op=45, bays="", speed=150, acc=140, dec=110, turn=80,
+         fp=5, hp=1400, armor=150, flux=2400, diss=160, op=50, bays="", speed=150, acc=140, dec=110, turn=80,
          tacc=160, mass=160, shield="FRONT", arc=180, upkeep=0.4, eff=0.8, crew=(10, 25), cargo=35, fuel=25,
          fuelly=1, burn=10, value=15000, crday=10, crdeploy=10, peak=240, dp=5, pieces=(2, 2), tags="tlc_bureau, tlc_bureau_bp",
          codex="tlc_tally_Standard", number=9001),
@@ -76,7 +76,7 @@ SHIPS = [
          system="tlc_summary_judgment", fp=22, hp=11000, armor=1100, flux=15000, diss=900, op=210, bays="",
          speed=70, acc=50, dec=40, turn=20, tacc=28, mass=1700, shield="OMNI", arc=300, upkeep=0.5, eff=0.6,
          crew=(120, 220), cargo=120, fuel=150, fuelly=4, burn=9, value=300000, crday=3, crdeploy=15, peak=420,
-         dp=32, pieces=(2, 3), tags="tlc_unique", codex="tlc_plenipotentiary_Standard", number=9005),
+         dp=36, pieces=(2, 3), tags="tlc_unique", codex="tlc_plenipotentiary_Standard", number=9005),
 ]
 
 
@@ -105,14 +105,14 @@ def ship_rows():
 # =========================================================================== WEAPONS
 WEAPONS = [
     {"name": "Writ Projector", "id": "tlc_writ", "tier": 2, "base value": 1200, "range": 600,
-     "damage/second": 50, "impact": 0, "turn rate": 45, "OPs": 5, "type": "ENERGY", "energy/second": 45,
+     "damage/second": 50, "impact": 0, "turn rate": 45, "OPs": 4, "type": "ENERGY", "energy/second": 45,
      "chargeup": 0.1, "chargedown": 0.2, "beam speed": 2400,
      "tags": "beam6, energy5, tlc_bureau, tlc_bureau_bp", "tech/manufacturer": "Bureau",
      "primaryRoleStr": "Seizure",
      "customPrimary": "A ship destroyed or disabled within %s seconds of being hit by a Writ is seized, and is always recoverable after the battle.",
      "customPrimaryHL": "3", "number": 9101},
     {"name": "Subpoena SRM", "id": "tlc_subpoena", "tier": 1, "base value": 600, "range": 1400,
-     "damage/shot": 150, "emp": 600, "impact": 10, "turn rate": 30, "OPs": 4, "ammo": 4, "type": "ENERGY",
+     "damage/shot": 200, "emp": 700, "impact": 10, "turn rate": 30, "OPs": 4, "ammo": 4, "type": "ENERGY",
      "energy/shot": 0, "chargeup": 0, "chargedown": 2, "burst size": 1, "min spread": 0, "max spread": 0,
      "spread/shot": 0, "spread decay/sec": 0, "proj speed": 360, "launch speed": 80, "flight time": 4.5,
      "proj hitpoints": 120, "hints": "DO_NOT_AIM", "tags": "missile6, strike2, tlc_bureau, tlc_bureau_bp",
@@ -133,8 +133,8 @@ WEAPONS = [
      "customPrimary": "Hits reduce the target's weapon rate of fire and beam damage by %s for %s seconds. Does not stack.",
      "customPrimaryHL": "20% | 4", "number": 9104},
     {"name": "Foreclosure Battery", "id": "tlc_foreclosure", "tier": 3, "base value": 9000, "range": 900,
-     "damage/shot": 550, "impact": 30, "turn rate": 12, "OPs": 22, "type": "ENERGY", "energy/shot": 650,
-     "chargeup": 0.4, "chargedown": 1.3, "burst size": 1, "proj speed": 800,
+     "damage/shot": 700, "impact": 30, "turn rate": 12, "OPs": 22, "type": "ENERGY", "energy/shot": 800,
+     "chargeup": 0.3, "chargedown": 1.2, "burst size": 1, "proj speed": 800,
      "tags": "energy16, tlc_bureau, tlc_bureau_bp", "tech/manufacturer": "Bureau", "primaryRoleStr": "Finisher",
      "customPrimary": "Deals %s bonus damage to ships above %s flux.", "customPrimaryHL": "50% | 50%",
      "number": 9105},
@@ -303,13 +303,13 @@ def group(mode, autofire, weapons):
 
 
 VARIANTS = {
-    "tlc_tally_Standard": dict(hull="tlc_tally", name="Standard", vents=10, caps=7,
+    "tlc_tally_Standard": dict(hull="tlc_tally", name="Standard", vents=10, caps=10,
                                mods=["hardenedshieldemitter", "auxiliarythrusters"], groups=[
             group("LINKED", False, {"WS 001": "irpulse"}),
             group("LINKED", True, {"WS 003": "irpulse", "WS 004": "irpulse"}),
             group("LINKED", False, {"WS 002": "tlc_subpoena"})]),
     "tlc_tally_Writ": dict(hull="tlc_tally", name="Writ Carrier", vents=10, caps=10,
-                           mods=["hardenedshieldemitter", "unstable_injector"], groups=[
+                           mods=["hardenedshieldemitter", "unstable_injector", "auxiliarythrusters"], groups=[
             group("LINKED", False, {"WS 001": "tlc_writ"}),
             group("LINKED", True, {"WS 003": "pdlaser", "WS 004": "pdlaser"}),
             group("LINKED", False, {"WS 002": "tlc_subpoena"})]),
@@ -319,13 +319,13 @@ VARIANTS = {
             group("LINKED", False, {"WS 001": "tlc_injunction"}),
             group("ALTERNATING", False, {"WS 004": "tlc_subpoena", "WS 005": "tlc_subpoena"}),
             group("LINKED", True, {"WS 006": "pdlaser", "WS 007": "pdlaser"})]),
-    "tlc_assessor_Support": dict(hull="tlc_assessor", name="Support", vents=17, caps=8,
+    "tlc_assessor_Support": dict(hull="tlc_assessor", name="Support", vents=19, caps=8,
                                  mods=["targetingunit", "heavyarmor"], groups=[
             group("LINKED", False, {"WS 002": "heavymauler", "WS 003": "heavymauler"}),
             group("LINKED", False, {"WS 001": "tlc_injunction"}),
             group("ALTERNATING", False, {"WS 004": "harpoon", "WS 005": "harpoon"}),
             group("LINKED", True, {"WS 006": "tlc_writ", "WS 007": "tlc_writ"})]),
-    "tlc_magistrate_Standard": dict(hull="tlc_magistrate", name="Standard", vents=30, caps=13,
+    "tlc_magistrate_Standard": dict(hull="tlc_magistrate", name="Standard", vents=30, caps=15,
                                     mods=["hardenedshieldemitter", "targetingunit"], groups=[
             group("LINKED", False, {"WS 001": "tlc_foreclosure"}),
             group("LINKED", False, {"WS 002": "tlc_accrual", "WS 003": "tlc_accrual"}),
@@ -341,7 +341,7 @@ VARIANTS = {
             group("LINKED", False, {"WS 006": "tlc_subpoena"}),
             group("LINKED", True, {"WS 007": "pdlaser", "WS 008": "pdlaser"}),
             group("LINKED", True, {"WS 009": "irpulse", "WS 010": "irpulse"})]),
-    "tlc_exchequer_Standard": dict(hull="tlc_exchequer", name="Standard", vents=50, caps=36,
+    "tlc_exchequer_Standard": dict(hull="tlc_exchequer", name="Standard", vents=50, caps=38,
                                    mods=["hardenedshieldemitter", "targetingunit", "heavyarmor"], groups=[
             group("LINKED", False, {"WS 001": "tlc_foreclosure", "WS 002": "tlc_foreclosure"}),
             group("LINKED", False, {"WS 003": "hephag"}),
@@ -403,7 +403,8 @@ FACTION = {
     "priorityShips": {"tags": ["tlc_bureau"], "hulls": []},
     "knownFighters": {"tags": [], "fighters": []},
     "priorityFighters": {"tags": [], "fighters": []},
-    "knownWeapons": {"tags": ["tlc_bureau", "base_bp", "midline_bp", "hightech_bp", "missile_bp"], "weapons": []},
+    "knownWeapons": {"tags": ["tlc_bureau", "base_bp", "midline_bp", "hightech_bp", "missile_bp"],
+                     "weapons": ["heavymauler", "heavyblaster"]},
     "priorityWeapons": {"tags": ["tlc_bureau"], "weapons": []},
     "knownHullMods": {"tags": ["standard", "base_bp"], "hullMods": []},
     "shipSellFrequency": {},
