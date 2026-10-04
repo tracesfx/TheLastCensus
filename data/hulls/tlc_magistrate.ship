@@ -1,0 +1,267 @@
+{
+    "bounds": [
+        103.5,
+        0.0,
+        94.0,
+        -13.5,
+        69.6,
+        -20.4,
+        53.7,
+        -24.5,
+        46.7,
+        -30.0,
+        44.6,
+        -38.6,
+        38.0,
+        -43.8,
+        32.7,
+        -50.9,
+        24.5,
+        -53.7,
+        18.6,
+        -63.3,
+        10.0,
+        -69.8,
+        -10.0,
+        -69.8,
+        -31.8,
+        -69.6,
+        -43.5,
+        -67.7,
+        -38.0,
+        -43.8,
+        -67.7,
+        -43.5,
+        -82.3,
+        -37.6,
+        -97.9,
+        -28.7,
+        -98.0,
+        -14.1,
+        -97.5,
+        -0.0,
+        -98.0,
+        14.1,
+        -97.9,
+        28.7,
+        -69.4,
+        44.6,
+        -38.6,
+        44.6,
+        -43.5,
+        67.7,
+        -32.4,
+        71.0,
+        -20.7,
+        70.5,
+        -10.2,
+        70.8,
+        10.2,
+        70.8,
+        18.6,
+        63.3,
+        24.9,
+        54.6,
+        32.7,
+        50.9,
+        44.6,
+        38.6,
+        47.5,
+        30.5,
+        53.7,
+        24.5,
+        70.0,
+        20.6,
+        94.5,
+        13.6
+    ],
+    "builtInMods": [
+        "tlc_protocols"
+    ],
+    "center": [
+        75.0,
+        102
+    ],
+    "collisionRadius": 115.9,
+    "engineSlots": [
+        {
+            "angle": 180.0,
+            "contrailSize": 55.0,
+            "length": 34.0,
+            "location": [
+                -98,
+                21.0
+            ],
+            "style": "TLC_LEDGER",
+            "width": 10.0
+        },
+        {
+            "angle": 180.0,
+            "contrailSize": 55.0,
+            "length": 34.0,
+            "location": [
+                -98,
+                7.0
+            ],
+            "style": "TLC_LEDGER",
+            "width": 10.0
+        },
+        {
+            "angle": 180.0,
+            "contrailSize": 55.0,
+            "length": 34.0,
+            "location": [
+                -98,
+                -7.0
+            ],
+            "style": "TLC_LEDGER",
+            "width": 10.0
+        },
+        {
+            "angle": 180.0,
+            "contrailSize": 55.0,
+            "length": 34.0,
+            "location": [
+                -98,
+                -21.0
+            ],
+            "style": "TLC_LEDGER",
+            "width": 10.0
+        }
+    ],
+    "height": 210,
+    "hullId": "tlc_magistrate",
+    "hullName": "Magistrate",
+    "hullSize": "CRUISER",
+    "shieldCenter": [
+        0.0,
+        0.0
+    ],
+    "shieldRadius": 107.7,
+    "spriteName": "graphics/ships/tlc_magistrate.png",
+    "style": "TLC_BUREAU",
+    "viewOffset": 0,
+    "weaponSlots": [
+        {
+            "angle": 0.0,
+            "arc": 270.0,
+            "id": "WS 001",
+            "locations": [
+                70,
+                0.0
+            ],
+            "mount": "TURRET",
+            "size": "LARGE",
+            "type": "ENERGY"
+        },
+        {
+            "angle": -15.0,
+            "arc": 220.0,
+            "id": "WS 002",
+            "locations": [
+                28,
+                -36.0
+            ],
+            "mount": "TURRET",
+            "size": "MEDIUM",
+            "type": "BALLISTIC"
+        },
+        {
+            "angle": 15.0,
+            "arc": 220.0,
+            "id": "WS 003",
+            "locations": [
+                28,
+                36.0
+            ],
+            "mount": "TURRET",
+            "size": "MEDIUM",
+            "type": "BALLISTIC"
+        },
+        {
+            "angle": -70.0,
+            "arc": 220.0,
+            "id": "WS 004",
+            "locations": [
+                -12,
+                -60.0
+            ],
+            "mount": "TURRET",
+            "size": "MEDIUM",
+            "type": "ENERGY"
+        },
+        {
+            "angle": 70.0,
+            "arc": 220.0,
+            "id": "WS 005",
+            "locations": [
+                -12,
+                60.0
+            ],
+            "mount": "TURRET",
+            "size": "MEDIUM",
+            "type": "ENERGY"
+        },
+        {
+            "angle": 0.0,
+            "arc": 20.0,
+            "id": "WS 006",
+            "locations": [
+                10,
+                0.0
+            ],
+            "mount": "HARDPOINT",
+            "size": "MEDIUM",
+            "type": "MISSILE"
+        },
+        {
+            "angle": -45.0,
+            "arc": 230.0,
+            "id": "WS 007",
+            "locations": [
+                44,
+                -21.0
+            ],
+            "mount": "TURRET",
+            "size": "SMALL",
+            "type": "ENERGY"
+        },
+        {
+            "angle": 45.0,
+            "arc": 230.0,
+            "id": "WS 008",
+            "locations": [
+                44,
+                21.0
+            ],
+            "mount": "TURRET",
+            "size": "SMALL",
+            "type": "ENERGY"
+        },
+        {
+            "angle": -135.0,
+            "arc": 230.0,
+            "id": "WS 009",
+            "locations": [
+                -63,
+                -37.0
+            ],
+            "mount": "TURRET",
+            "size": "SMALL",
+            "type": "ENERGY"
+        },
+        {
+            "angle": 135.0,
+            "arc": 230.0,
+            "id": "WS 010",
+            "locations": [
+                -63,
+                37.0
+            ],
+            "mount": "TURRET",
+            "size": "SMALL",
+            "type": "ENERGY"
+        }
+    ],
+    "width": 150
+}
