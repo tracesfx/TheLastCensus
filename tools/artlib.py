@@ -278,6 +278,28 @@ class Canvas:
                         a = self.P(px, py)
                         self.ldraw.rectangle([a[0], a[1], a[0] + size * 0.8 * SS, a[1] + size * 0.8 * SS], fill=200)
 
+    def notch(self, x, y, w, h, sym=False):
+        """Cut a rectangular notch down to frame height (breaks up long straight plate edges)."""
+        variants = [False, True] if sym else [False]
+        for mir in variants:
+            xx = -x if mir else x
+            self.part(("rect", xx - w / 2, y - h / 2, xx + w / 2, y + h / 2), z=0.13, bevel=0.4, mat="slate2",
+                      override=True)
+
+    def antenna(self, x, y, length, angle_deg, width=0.8, sym=False, tip=True):
+        """Thin mast protruding from the hull for silhouette detail. angle 0 = forward (up), +90 = image right."""
+        variants = [False, True] if sym else [False]
+        for mir in variants:
+            a = math.radians(-angle_deg if mir else angle_deg)
+            sx = -x if mir else x
+            ex, ey = sx + math.sin(a) * length, y - math.cos(a) * length
+            nx, ny = math.cos(a) * width / 2, math.sin(a) * width / 2
+            pts = [(sx - nx, y - ny), (sx + nx, y + ny), (ex + nx, ey + ny), (ex - nx, ey - ny)]
+            self.part(("poly", pts), z=max(0.2, self._h_at(sx, y) + 0.02), bevel=0.3, mat="slate")
+            self.part(("ellipse", ex, ey, width * 0.9, width * 0.9), z=0.25, bevel=0.3, mat="brass")
+            if tip:
+                self.light(ex, ey, color=(255, 200, 120), r=0.55, strength=0.7)
+
     def socket(self, x, y, r, mount="TURRET", angle=0.0):
         """Weapon mount socket: raised collar with a recessed (not black) well, like vanilla mounts."""
         z = self._h_max(x, y, r + 1.4)
@@ -353,7 +375,7 @@ class Canvas:
         return float(self.height[py, px])
 
     # ---- final render
-    def render(self, grime=0.18, outline=0.55, ao=0.55, spec=0.35, wear_seed=7):
+    def render(self, grime=0.22, outline=0.6, ao=0.62, spec=0.35, wear_seed=7):
         h = self.height.copy()
         lines = np.asarray(self.lines, np.float32) / 255.0
         hil = np.asarray(self.highlights, np.float32) / 255.0
