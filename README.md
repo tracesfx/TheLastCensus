@@ -22,6 +22,7 @@ The tone is dry and a little melancholy, with machines that are very polite abou
 - Starsector **0.98a**
 - [LazyLib](https://fractalsoftworks.com/forum/index.php?topic=5444.0)
 - [LunaLib](https://fractalsoftworks.com/forum/index.php?topic=25658.0) (in-game settings menu)
+- Optional: GraphicsLib. If it is enabled, Bureau projectiles and beams cast dynamic light.
 
 ## Installation
 1. Extract the `TheLastCensus` folder into `Starsector/mods/`.

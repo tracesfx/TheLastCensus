@@ -26,6 +26,7 @@ CP_ENTRIES=(
   "$MODS/LazyLib/jars/LazyLib.jar"
   "$MODS/LazyLib/jars/internal/Kotlin-Runtime.jar"
   "$MODS/LunaLib/jars/LunaLib.jar"
+  "$MODS/GraphicsLib/jars/Graphics.jar"   # optional at runtime; needed only to compile tlc.compat
 )
 CP=""
 for e in "${CP_ENTRIES[@]}"; do

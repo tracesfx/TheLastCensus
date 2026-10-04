@@ -14,8 +14,8 @@
 | Item | Result |
 |---|---|
 | Compiler | Temurin javac 17.0.20.1, `--release 17` (game runs Azul Zulu 17.0.10; API class files are major 61) |
-| Classpath | starfarer.api.jar, json, log4j, lwjgl, lwjgl_util, xstream, LazyLib (+Kotlin runtime), LunaLib |
-| Sources | 27 Java files, ~3,400 lines |
+| Classpath | starfarer.api.jar, json, log4j, lwjgl, lwjgl_util, xstream, LazyLib (+Kotlin runtime), LunaLib, GraphicsLib (compile-time only, for the optional `tlc.compat` class) |
+| Sources | 28 Java files, ~3,400 lines |
 | Errors / warnings | 0 / 0 with `-Xlint:all` (serial/options/classfile/processing lint categories off) |
 | Output | `jars/TheLastCensus.jar` |
 | Command | `./build.sh` (fails with non-zero exit on any javac error or validator error) |
@@ -59,6 +59,7 @@
     Every `setCustomDescriptionId`, `addCustomEntity` type, `addCondition`, `addIndustry` and `addSubmarket` literal
     resolves. Every graphics path in Java exists.
 13. **Assets:** no orphan files under `graphics/`.
+14. **GraphicsLib light data (optional):** header identical to GraphicsLib's `core_light_data.csv`; every projectile/beam id exists; type valid; the compat call is guarded by `isModEnabled("shaderLib")`.
 
 **Validator self-test (fault injection):** each of the following was deliberately broken and caught, then restored:
 illegal mount (large weapon in a small slot), OP overflow, unknown weapon in the faction file, slot moved outside the
@@ -147,5 +148,5 @@ validate.py: 0 error(s), 0 warning(s)
 * **Nexerelin random sector and sector-replacing mods are untested.** Assize and Envoi are placed relative to fixed
   coordinates with a free-space search, so they still generate, but distances to the core may differ.
 * **Art** is procedural. It is consistent and readable but less detailed than vanilla's hand-painted sprites; there
-  are no GraphicsLib normal/material maps.
+  are no GraphicsLib normal/material maps (light data only).
 * **No custom sounds or music**; vanilla sounds and tracks are reused by id.

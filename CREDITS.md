@@ -27,6 +27,7 @@ The mod points at these existing Starsector files by path or id, exactly as vani
 ## Libraries
 - **LazyLib** by LazyWizard (dependency)
 - **LunaLib** by Lukas04 (settings menu)
+- **GraphicsLib** by DarkRevenant (optional; projectile/beam light data in `data/lights/tlc_light_data.csv`)
 
 ## Thanks
 Fractal Softworks for Starsector and for shipping the API source with the game, which made it possible to build

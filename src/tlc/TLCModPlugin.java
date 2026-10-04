@@ -10,6 +10,7 @@ import tlc.campaign.TLCAutomatedAdminCondition;
 import tlc.campaign.TLCCensusIntel;
 import tlc.campaign.TLCFleetListener;
 import tlc.campaign.TLCHearingIntel;
+import tlc.compat.TLCGraphicsLibCompat;
 import tlc.world.TLCWorldGen;
 
 public class TLCModPlugin extends BaseModPlugin {
@@ -18,6 +19,14 @@ public class TLCModPlugin extends BaseModPlugin {
     @Override
     public void onApplicationLoad() throws Exception {
         log.info("The Last Census loaded. The Grand Audit is pending.");
+        // Optional: dynamic lights for Bureau projectiles when GraphicsLib is present.
+        if (Global.getSettings().getModManager().isModEnabled("shaderLib")) {
+            try {
+                TLCGraphicsLibCompat.loadLights();
+            } catch (Throwable t) {
+                log.warn("TLC: GraphicsLib is enabled but light data could not be loaded", t);
+            }
+        }
     }
 
     @Override

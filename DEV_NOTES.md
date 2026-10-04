@@ -158,6 +158,7 @@ runcode Global.getSector().getMemoryWithoutUpdate().unset("$tlc_certified")     
 | `tlc.rulecmd` | rules.csv commands: `TLCAuditCMD`, `TLCRegistrarCMD`, `TLCCensusCMD`, `TLCHearingCMD` |
 | `tlc.combat` | `TLCLedgerPlugin` + weapon effects |
 | `tlc.hullmods`, `tlc.systems` | Assessor Protocols; Surcharge and Summary Judgment (stats + AI) |
+| `tlc.compat` | Optional GraphicsLib light registration (loaded only when `shaderLib` is enabled) |
 
 Tooling: `./build.sh` (compile + jar + validate), `tools/gen_data.py` (all CSV/JSON data and prose),
 `tools/gen_rules.py` (rules.csv), `tools/gen_ships.py`/`gen_weapons.py`/`gen_misc.py` (art plus `.ship` files),

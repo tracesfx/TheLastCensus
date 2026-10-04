@@ -951,6 +951,26 @@ for p in glob.glob(mod("src", "**", "*.java"), recursive=True):
         if m.group(1) not in ALL["submarket"]:
             err("%s: unknown submarket %s" % (rel(p), m.group(1)))
 
+# ------------------------------------------------------------------ 10b. GraphicsLib light data (optional)
+LIGHTS = mod("data", "lights", "tlc_light_data.csv")
+GLIB_CORE = os.path.join(GAME, "mods", "GraphicsLib", "data", "lights", "core_light_data.csv")
+if os.path.exists(LIGHTS):
+    hdr, _ = read_csv(LIGHTS)
+    if os.path.exists(GLIB_CORE):
+        ghdr, _ = read_csv(GLIB_CORE)
+        if hdr != ghdr:
+            err("tlc_light_data.csv header differs from GraphicsLib core_light_data.csv")
+    for d in csv_dicts(LIGHTS):
+        if d["type"] == "projectile" and d["id"] not in ALL["proj"]:
+            err("light data: unknown projectile %s" % d["id"])
+        if d["type"] == "beam" and (d["id"] not in WSPEC or WSPEC[d["id"]].get("specClass") != "beam"):
+            err("light data: %s is not a beam weapon" % d["id"])
+        if d["type"] not in ("projectile", "beam"):
+            err("light data: bad type %s" % d["type"])
+    with open(mod("src", "tlc", "TLCModPlugin.java"), encoding="utf-8") as f:
+        if "isModEnabled(\"shaderLib\")" not in f.read():
+            err("GraphicsLib compat must be guarded by isModEnabled(\"shaderLib\")")
+
 # ------------------------------------------------------------------ 11. orphan graphics
 referenced = set()
 for r, d in mod_json.items():
