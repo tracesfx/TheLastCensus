@@ -14,6 +14,7 @@ import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.Ranks;
 import com.fs.starfarer.api.impl.campaign.ids.StarTypes;
 import com.fs.starfarer.api.impl.campaign.ids.Terrain;
+import com.fs.starfarer.api.impl.campaign.intel.deciv.DecivTracker;
 import com.fs.starfarer.api.impl.campaign.procgen.NebulaEditor;
 import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
@@ -121,6 +122,8 @@ public final class TLCWorldGen {
         market.addSubmarket(TLCIds.SUBMARKET_MILITARY);
         market.addSubmarket(TLCIds.SUBMARKET_STORAGE);
         market.getMemoryWithoutUpdate().set(TLCIds.MEM_TALLYHOUSE, true);
+        market.setSurveyLevel(MarketAPI.SurveyLevel.FULL);
+        protectTallyhouse(market);
         station.setMarket(market);
         station.setFaction(TLCIds.FACTION_BUREAU);
         Global.getSector().getEconomy().addMarket(market, true);
@@ -207,6 +210,22 @@ public final class TLCWorldGen {
         bureau.setRelationship(other, rel);
     }
 
+    /**
+     * The questline runs through the Tallyhouse, so until it is finished the market is story-critical (immune to
+     * destruction by saturation bombardment) and exempt from decivilization. Released by TLCQuest on completion.
+     */
+    public static void protectTallyhouse(MarketAPI market) {
+        if (market == null) return;
+        Misc.makeStoryCritical(market, TLCIds.REASON_STORY);
+        market.getMemoryWithoutUpdate().set(DecivTracker.NO_DECIV_KEY, true);
+    }
+
+    public static void releaseTallyhouse(MarketAPI market) {
+        if (market == null) return;
+        Misc.makeNonStoryCritical(market, TLCIds.REASON_STORY);
+        market.getMemoryWithoutUpdate().unset(DecivTracker.NO_DECIV_KEY);
+    }
+
     /** Creates the Registrar if missing and (re)attaches it to the Tallyhouse market. Idempotent. */
     public static void ensurePeople(SectorAPI sector) {
         if (sector == null) return;
@@ -224,7 +243,10 @@ public final class TLCWorldGen {
                 ip.addPerson(reg);
             }
             MarketAPI market = Global.getSector().getEconomy().getMarket(TLCIds.ID_TALLYHOUSE_MARKET);
-            if (market != null) {
+            if (market != null && TLCIds.FACTION_BUREAU.equals(market.getFactionId())) {
+                if (!TLCIds.STAGE_DONE.equals(sector.getMemoryWithoutUpdate().getString(TLCIds.MEM_STAGE))) {
+                    protectTallyhouse(market);
+                }
                 if (market.getAdmin() != reg) market.setAdmin(reg);
                 if (market.getCommDirectory() != null && market.getCommDirectory().getEntryForPerson(reg) == null) {
                     market.getCommDirectory().addPerson(reg);

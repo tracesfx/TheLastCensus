@@ -56,6 +56,10 @@ public class TLCHearingCMD extends BaseCommandPlugin {
                 + "her, which for the purposes of this hearing amounts to the same thing.\"");
         t.addPara("\"Three of my Assessors have recorded the same testimony from you: that the Domain no longer exists. "
                 + "Testimony is not evidence. I have come to examine the evidence.\"");
+        if (TLCMem.flag(TLCIds.MEM_AUDITS_ENDED)) {
+            t.addPara("\"I am aware that the Registrar has closed the Grand Audit. The Office of the Inspector-General "
+                    + "does not close when an audit does. A referral, once filed, is heard.\"");
+        }
         t.addPara("\"The hypothesis is simple. If the Domain still stands, no unregistered fleet could defeat an officer "
                 + "of the Bureau. If you can defeat me, then the Domain is not standing behind me.\" The lens opens a "
                 + "fraction wider. \"Shall we proceed?\"", Misc.getHighlightColor(), "If you can defeat me");
@@ -69,8 +73,8 @@ public class TLCHearingCMD extends BaseCommandPlugin {
     }
 
     private boolean defer(InteractionDialogAPI dialog, TextPanelAPI t) {
-        t.addPara("\"A continuance, then. The hearing is adjourned.\" The lens narrows. \"I will hold session at the "
-                + "Tallyhouse. Present yourself when you are ready to give evidence. I have been patient for two hundred "
+        t.addPara("\"A continuance, then. The hearing is adjourned.\" The lens narrows. \"I will hold session in orbit of "
+                + "Assize. Present yourself when you are ready to give evidence. I have been patient for two hundred "
                 + "cycles; I can be patient a little longer.\"");
         if (dialog.getInteractionTarget() instanceof CampaignFleetAPI) {
             TLCInspectorGeneral.sendHomeToWait((CampaignFleetAPI) dialog.getInteractionTarget());

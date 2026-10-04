@@ -33,6 +33,7 @@ import tlc.TLCIds;
 public final class TLCInspectorGeneral {
     private static final Logger log = Global.getLogger(TLCInspectorGeneral.class);
     private static final String REASON = "tlc_hearing";
+    private static final float WAIT_RADIUS = 3200f;
 
     private TLCInspectorGeneral() {
     }
@@ -106,17 +107,29 @@ public final class TLCInspectorGeneral {
         setPursuit(f, true);
     }
 
+    /**
+     * Where the IG holds session: the Assize star, at a radius that keeps the hearing outside the Tallyhouse's
+     * station support range (the station must not join the hearing).
+     */
+    private static SectorEntityToken waitAnchor() {
+        SectorEntityToken home = TLCMem.tallyhouse();
+        if (home != null && home.getStarSystem() != null && home.getStarSystem().getStar() != null) {
+            return home.getStarSystem().getStar();
+        }
+        return home;
+    }
+
     private static void ensureWaitingFleet() {
         CampaignFleetAPI f = findFleet();
         if (f != null) return;
-        SectorEntityToken home = TLCMem.tallyhouse();
-        if (home == null || !TLCMem.tallyhouseIntact()) return;
+        SectorEntityToken anchor = waitAnchor();
+        if (anchor == null || !TLCMem.tallyhouseIntact()) return;
         f = createFleet();
         if (f == null) return;
-        home.getContainingLocation().addEntity(f);
-        Vector2f p = Misc.getPointAtRadius(home.getLocation(), 300f);
+        anchor.getContainingLocation().addEntity(f);
+        Vector2f p = Misc.getPointAtRadius(anchor.getLocation(), WAIT_RADIUS);
         f.setLocation(p.x, p.y);
-        f.addAssignment(FleetAssignment.ORBIT_PASSIVE, home, 1000000f, "holding session at the Tallyhouse");
+        f.addAssignment(FleetAssignment.ORBIT_PASSIVE, anchor, 1000000f, "holding session in orbit of Assize");
         TLCHearingIntel intel = TLCHearingIntel.get();
         if (intel != null) intel.setFleet(f);
     }
@@ -128,10 +141,10 @@ public final class TLCInspectorGeneral {
         Misc.setFlagWithReason(mem, MemFlags.MEMORY_KEY_MAKE_HOSTILE, REASON, false, 0f);
         Misc.setFlagWithReason(mem, MemFlags.MEMORY_KEY_MAKE_AGGRESSIVE, REASON, false, 0f);
         f.clearAssignments();
-        SectorEntityToken home = TLCMem.tallyhouse();
-        if (home != null) {
-            f.addAssignment(FleetAssignment.GO_TO_LOCATION, home, 200f, "returning to the Tallyhouse");
-            f.addAssignment(FleetAssignment.ORBIT_PASSIVE, home, 1000000f, "holding session at the Tallyhouse");
+        SectorEntityToken anchor = waitAnchor();
+        if (anchor != null) {
+            f.addAssignment(FleetAssignment.GO_TO_LOCATION, anchor, 200f, "returning to Assize");
+            f.addAssignment(FleetAssignment.ORBIT_PASSIVE, anchor, 1000000f, "holding session in orbit of Assize");
         }
         TLCMem.setString(TLCIds.MEM_IG_STATE, TLCIds.IG_WAITING);
         TLCHearingIntel intel = TLCHearingIntel.get();
@@ -142,14 +155,13 @@ public final class TLCInspectorGeneral {
         MemoryAPI mem = f.getMemoryWithoutUpdate();
         Misc.setFlagWithReason(mem, MemFlags.MEMORY_KEY_PURSUE_PLAYER, REASON, on, 1.5f);
         Misc.setFlagWithReason(mem, MemFlags.MEMORY_KEY_STICK_WITH_PLAYER_IF_ALREADY_TARGET, REASON, on, 1.5f);
-        // Same flags vanilla's HasslePlayerScript uses, so the fleet is not co-opted by other AI behaviour.
+        // Exactly the flags vanilla's HasslePlayerScript uses (pursue, stick, busy, special action). Deliberately no
+        // FLEET_IGNORES_OTHER_FLEETS: without FLEET_DO_NOT_IGNORE_PLAYER it would also make the IG ignore the player.
         Misc.setFlagWithReason(mem, MemFlags.FLEET_BUSY, REASON, on, 1.5f);
         if (on) {
             mem.set(MemFlags.FLEET_SPECIAL_ACTION, true, 1.5f);
-            mem.set(MemFlags.FLEET_IGNORES_OTHER_FLEETS, true, 1.5f);
         } else {
             mem.unset(MemFlags.FLEET_SPECIAL_ACTION);
-            mem.unset(MemFlags.FLEET_IGNORES_OTHER_FLEETS);
         }
     }
 
@@ -216,6 +228,8 @@ public final class TLCInspectorGeneral {
             MemoryAPI mem = fleet.getMemoryWithoutUpdate();
             mem.set(TLCIds.MEM_IG_FLEET, true);
             mem.set(MemFlags.FLEET_FIGHT_TO_THE_LAST, true);
+            // The hearing is between the player and the IG: no stations or bystander fleets join either side.
+            mem.set(MemFlags.FLEET_INTERACTION_DIALOG_CONFIG_OVERRIDE_GEN, new TLCHearingConfigGen());
             Misc.makeImportant(fleet, REASON);
             fleet.setNoAutoDespawn(true);
             fleet.addEventListener(new TLCFleetListener(TLCFleetListener.KIND_IG));

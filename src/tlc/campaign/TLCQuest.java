@@ -26,6 +26,7 @@ import com.fs.starfarer.api.util.Misc;
 import org.apache.log4j.Logger;
 import org.lwjgl.util.vector.Vector2f;
 import tlc.TLCIds;
+import tlc.world.TLCWorldGen;
 
 import java.util.Random;
 
@@ -46,6 +47,7 @@ public final class TLCQuest {
 
     public static void setStage(String stage, TextPanelAPI panel) {
         TLCMem.setString(TLCIds.MEM_STAGE, stage);
+        if (TLCIds.STAGE_DONE.equals(stage)) TLCWorldGen.releaseTallyhouse(TLCMem.tallyhouseMarket());
         TLCCensusIntel.update(stage, panel);
     }
 
@@ -68,6 +70,8 @@ public final class TLCQuest {
             MemoryAPI mem = fleet.getMemoryWithoutUpdate();
             mem.set(TLCIds.MEM_RELAY_PIRATES, true);
             Misc.setFlagWithReason(mem, MemFlags.MEMORY_KEY_MAKE_AGGRESSIVE, "tlc_relay", true, -1f);
+            Misc.setFlagWithReason(mem, MemFlags.MEMORY_KEY_MAKE_HOSTILE, "tlc_relay", true, -1f);
+            Misc.setFlagWithReason(mem, MemFlags.MEMORY_KEY_LOW_REP_IMPACT, "tlc_relay", true, -1f);
             Misc.makeImportant(fleet, "tlc_relay");
             fleet.setNoAutoDespawn(true);
             envoi.addEntity(fleet);

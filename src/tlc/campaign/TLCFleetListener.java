@@ -12,7 +12,6 @@ public class TLCFleetListener implements FleetEventListener {
     private static final Logger log = Global.getLogger(TLCFleetListener.class);
 
     public static final String KIND_IG = "ig";
-    public static final String KIND_RELAY = "relay";
 
     private String kind;
 

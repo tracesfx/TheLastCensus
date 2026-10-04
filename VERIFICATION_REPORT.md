@@ -133,18 +133,31 @@ validate.py: 0 error(s), 0 warning(s)
 | 20 | Seized ships permanently always-recoverable | **Found and fixed**: tags stripped once the ship is in the player's fleet |
 | 21 | `String.format` crash from a stray `%` in UI text | All `addPara` format strings audited; percentages only appear in substituted values or `{{}}` description markup |
 | 22 | Save breakage | Only vanilla objects, primitives and a String-holding listener are saved; no anonymous classes; XStream aliases registered |
-| 23 | Registrar option offered when the quest can't proceed (Tallyhouse captured) | **Found and fixed**: option now requires Bureau ownership, consistent with the intel's warning |
+| 23 | Tallyhouse lost (captured or destroyed) | Story-critical and no decivilization until the quest ends; the Registrar is reachable whoever owns it (see 5.2 #1) |
 | 24 | Economy exploits | Audits only take; census pays once per colony; no new commodities (BALANCE.md §Economy) |
 
 ### 5.2 Independent reviewer agent
-*(Filled in below with its findings and the fixes applied.)*
+An independent agent reviewed every Java file and rules.csv against the API source (read-only). It found no crashes, no
+save-format problems, and no concurrent-modification risks. It reported 9 issues, all fixed after re-checking each one against the source:
+
+| # | Finding | Fix |
+|---|---|---|
+| 1 | SOFTLOCK: one saturation bombardment (Tallyhouse is size 4) or decivilization could destroy the Tallyhouse and freeze the quest; `ensurePeople` overrode the admin of a captured Tallyhouse | Market is story-critical and has `NO_DECIV_KEY` until the quest ends; the Registrar option works whoever owns the market; the admin is only set while the Bureau owns it |
+| 2 | IG pursuit set FLEET_IGNORES_OTHER_FLEETS, which likely also ignores the player, so it would never hail | Removed; pursuit now uses exactly the vanilla HasslePlayerScript flags |
+| 3 | Hearing at the Tallyhouse would pull the station into the battle | IG waits in orbit of the Assize star (3200 su); fleet carries a FIDConfigGen with `pullInStations/Allies/Enemies = false` (vanilla Remnant pattern) |
+| 4 | `tlc_igBegin` lacked `unset $ignorePlayerCommRequests`, so vanilla greetingNoComms could block the hearing | Added; the IG comms no longer set the ignore flag |
+| 5 | Liens could re-settle on wrecks | Listener ignores hulks; processed wrecks are recorded and never accrue again |
+| 6 | An audit already in pursuit could still fire after certification, commission or closure | Rule guards on all three, plus the manager marks in-progress hassles complete; IG greeting acknowledges a closed audit |
+| 7 | Relay gang was only aggressive (pirate-friendly players could not fight it cleanly); unused listener kind; DESIGN claimed a respawn | Gang is made hostile with low rep impact; dead code removed; DESIGN corrected |
+| 8 | Per-frame allocations in the debuff and writ paths | Ship-indexed ordinal arrays, swap-remove list, mutable float holders: no allocation per frame |
+| 9 | Market never set survey level | `setSurveyLevel(FULL)` |
 
 ## 6. Known limitations and untested areas
 * **Not play-tested.** Fleet AI behaviour (Assessor routes, Surcharge/Summary Judgment AI timing), visual effects,
   and real combat balance have only been reasoned about, not observed.
 * **Hassle timing** is vanilla's: audits can take a while to happen (25% roll per eligible encounter, 20–30 day
   cooldown per type). The questline doesn't depend on audits; you can go straight to the Tallyhouse.
-* **Destroying the Tallyhouse** (e.g. saturation bombardment) or capturing it ends the questline; the intel says so.
+* The Tallyhouse cannot be destroyed or decivilized before the quest ends. Capturing it does not block the quest. Protection is released after the ending.
 * **Nexerelin random sector and sector-replacing mods are untested.** Assize and Envoi are placed relative to fixed
   coordinates with a free-space search, so they still generate, but distances to the core may differ.
 * **Art** is procedural. It is consistent and readable but less detailed than vanilla's hand-painted sprites; there

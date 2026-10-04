@@ -10,6 +10,7 @@ import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
+import com.fs.starfarer.api.impl.campaign.HasslePlayerScript;
 import com.fs.starfarer.api.combat.ShipVariantAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.fleets.FleetFactoryV3;
@@ -109,6 +110,11 @@ public class TLCAssessorManager implements EveryFrameScript {
             MemoryAPI mem = f.getMemoryWithoutUpdate();
             mem.set(MemFlags.WILL_HASSLE_PLAYER, allow);
             mem.set(MemFlags.HASSLE_TYPE, TLCIds.HASSLE_AUDIT);
+            // An audit already in pursuit when audits became disallowed (certificate, commission, closure, setting):
+            // mark it complete so vanilla HasslePlayerScript calls off the chase.
+            if (!allow && mem.contains(MemFlags.MEMORY_KEY_PURSUE_PLAYER + "_hassle")) {
+                mem.set(HasslePlayerScript.HASSLE_COMPLETE_KEY, true);
+            }
         }
     }
 

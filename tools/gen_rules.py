@@ -23,7 +23,8 @@ def rule(rid, trigger, cond=(), script=(), text="", options=(), notes=""):
 
 # ============================================================================ THE GRAND AUDIT
 rule("tlc_auditBegin", "BeginFleetEncounter",
-     ["!$hassle_didAlready", "!$isHostile", "$pursuePlayer_hassle score:50", "$hassleType == tlc_audit"],
+     ["!$hassle_didAlready", "!$isHostile", "$pursuePlayer_hassle score:50", "$hassleType == tlc_audit",
+      "!$global.tlc_certified", "!$global.tlc_commissioner", "!$global.tlc_auditsEnded"],
      ["$hassle_didAlready = true 0", "$hassleComplete = true", "MakeOtherFleetPreventDisengage hassle true",
       "unset $ignorePlayerCommRequests", "$tlc_auditConv = true 0", "HailPlayer"],
      notes="Assessor fleet hails the player (vanilla hassle framework)")
@@ -65,8 +66,7 @@ rule("tlc_auditRefuseWeakSel", "DialogOptionSelected", ["$option == tlc_auditRef
 
 # ============================================================================ THE REGISTRAR (Tallyhouse)
 rule("tlc_regOpt", "PopulateOptions",
-     ["$hasMarket", "$menuState == main", "$market.id == tlc_tallyhouse_market", "$faction.id == tlc_bureau",
-      "!$faction.isHostile"], [], "",
+     ["$hasMarket", "$menuState == main", "$market.id == tlc_tallyhouse_market", "!$faction.isHostile"], [], "",
      ["3:tlc_registrarOpen:Request an audience with the Registrar"])
 rule("tlc_regOpenSel", "DialogOptionSelected", ["$option == tlc_registrarOpen"],
      ["TLCRegistrarCMD show", "FireAll TLC_RegistrarOptions"])
@@ -157,10 +157,11 @@ rule("tlc_dloLeaveSel", "DialogOptionSelected", ["$option == tlc_dloLeave"], ["D
 
 # ============================================================================ THE HEARING (secret)
 rule("tlc_igBegin", "BeginFleetEncounter", ["$tlc_igFleet score:200", "!$isHostile", "TLCHearingCMD active"],
-     ["$tlc_igConv = true 0", "MakeOtherFleetPreventDisengage tlc_hearing true", "HailPlayer"],
+     ["$tlc_igConv = true 0", "unset $ignorePlayerCommRequests", "MakeOtherFleetPreventDisengage tlc_hearing true",
+      "HailPlayer"],
      notes="Inspector-General hails the player")
 rule("tlc_igComms", "OpenCommLink", ["$entity.tlc_igConv score:200"],
-     ["$entity.ignorePlayerCommRequests = true 1", "TLCHearingCMD greet", "FireAll TLC_HearingOptions"])
+     ["TLCHearingCMD greet", "FireAll TLC_HearingOptions"])
 rule("tlc_igOptSubmit", "TLC_HearingOptions", [], [], "", ['1:tlc_igSubmit:"Proceed."'])
 rule("tlc_igOptDefer", "TLC_HearingOptions", [], [], "", ['2:tlc_igDefer:"Not today."'])
 rule("tlc_igSubmitSel", "DialogOptionSelected", ["$option == tlc_igSubmit"],

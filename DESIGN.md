@@ -155,7 +155,7 @@ a vanilla AI portrait). Never cut validation or docs.
 | rules.csv mistakes (unreachable options, broken conditions) | Mirror the vanilla hassle template exactly; the validator checks rule option/trigger consistency and that every custom command exists |
 | Tagging shared stock variants (Writ) | Clone the variant before tagging, exactly as vanilla does post-inflation |
 | Assessor fleets clogging the economy or lagging | Hard cap (≤6), simple assignments, despawn when the route ends |
-| Quest soft-locks | No time limits on main stages; amnesty for hostility; relay pirates are respawned if despawned without being beaten; every stage reachable without combat luck |
+| Quest soft-locks | No time limits on main stages; amnesty for hostility; the relay unlocks as soon as the salvage gang is gone (for any reason); the Tallyhouse is story-critical and exempt from decivilization until the questline ends |
 | Sprite/slot misalignment | Slots are defined in the generator spec, which writes the PNG and the slot coordinates together; the validator checks bounds |
 | Economy exploits | No buy-back loops: census pays once per market; audits only cost the player; no new commodities |
 | Balance | Every number compared to vanilla baselines in BALANCE.md; identities through trade-offs |

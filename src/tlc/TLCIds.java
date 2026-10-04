@@ -86,6 +86,7 @@ public final class TLCIds {
     public static final String TYPE_INSPECTOR_FLEET = "tlc_inspector";
     public static final String HASSLE_AUDIT = "tlc_audit";
     public static final String SEIZED_TAG = "tlc_seized";
+    public static final String REASON_STORY = "tlc_census";
 
     // ---- memory keys
     public static final String MEM_GENERATED = "$tlc_generated";

@@ -2,7 +2,10 @@ id,trigger,conditions,script,text,options,notes
 tlc_auditBegin,BeginFleetEncounter,"!$hassle_didAlready
 !$isHostile
 $pursuePlayer_hassle score:50
-$hassleType == tlc_audit","$hassle_didAlready = true 0
+$hassleType == tlc_audit
+!$global.tlc_certified
+!$global.tlc_commissioner
+!$global.tlc_auditsEnded","$hassle_didAlready = true 0
 $hassleComplete = true
 MakeOtherFleetPreventDisengage hassle true
 unset $ignorePlayerCommRequests
@@ -39,7 +42,6 @@ MakeOtherFleetPreventDisengage hassle false",,cutCommLinkNoText:Cut the comm lin
 tlc_regOpt,PopulateOptions,"$hasMarket
 $menuState == main
 $market.id == tlc_tallyhouse_market
-$faction.id == tlc_bureau
 !$faction.isHostile",,,3:tlc_registrarOpen:Request an audience with the Registrar,
 tlc_regOpenSel,DialogOptionSelected,$option == tlc_registrarOpen,"TLCRegistrarCMD show
 FireAll TLC_RegistrarOptions",,,
@@ -115,10 +117,10 @@ tlc_dloLeaveSel,DialogOptionSelected,$option == tlc_dloLeave,DismissDialog,,,
 tlc_igBegin,BeginFleetEncounter,"$tlc_igFleet score:200
 !$isHostile
 TLCHearingCMD active","$tlc_igConv = true 0
+unset $ignorePlayerCommRequests
 MakeOtherFleetPreventDisengage tlc_hearing true
 HailPlayer",,,Inspector-General hails the player
-tlc_igComms,OpenCommLink,$entity.tlc_igConv score:200,"$entity.ignorePlayerCommRequests = true 1
-TLCHearingCMD greet
+tlc_igComms,OpenCommLink,$entity.tlc_igConv score:200,"TLCHearingCMD greet
 FireAll TLC_HearingOptions",,,
 tlc_igOptSubmit,TLC_HearingOptions,,,,"1:tlc_igSubmit:""Proceed.""",
 tlc_igOptDefer,TLC_HearingOptions,,,,"2:tlc_igDefer:""Not today.""",

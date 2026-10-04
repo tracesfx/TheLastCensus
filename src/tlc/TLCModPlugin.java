@@ -9,6 +9,7 @@ import tlc.campaign.TLCAssessorManager;
 import tlc.campaign.TLCAutomatedAdminCondition;
 import tlc.campaign.TLCCensusIntel;
 import tlc.campaign.TLCFleetListener;
+import tlc.campaign.TLCHearingConfigGen;
 import tlc.campaign.TLCHearingIntel;
 import tlc.compat.TLCGraphicsLibCompat;
 import tlc.world.TLCWorldGen;
@@ -60,6 +61,7 @@ public class TLCModPlugin extends BaseModPlugin {
         x.alias("TLC_CensusIntel", TLCCensusIntel.class);
         x.alias("TLC_HearingIntel", TLCHearingIntel.class);
         x.alias("TLC_FleetListener", TLCFleetListener.class);
+        x.alias("TLC_HearingConfigGen", TLCHearingConfigGen.class);
         x.alias("TLC_AutomatedAdmin", TLCAutomatedAdminCondition.class);
     }
 }
