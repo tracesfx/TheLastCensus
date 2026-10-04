@@ -126,12 +126,24 @@ def icons():
     glyph_icon("surcharge", 64, surcharge, "graphics/icons/hullsys/tlc_surcharge.png")
 
     def gavel(d, W, H):
-        cx, cy = W / 2, H / 2
-        # head
-        poly = [(-0.30, -0.36), (0.06, -0.06), (-0.06, 0.06), (-0.42, -0.24)]
-        d.polygon([(cx + x * W, cy + y * H) for x, y in poly], fill=white)
-        d.line([(cx + 0.00 * W, cy + 0.00 * H), (cx + 0.34 * W, cy + 0.34 * H)], fill=white, width=int(W * 0.08))
-        d.rectangle([cx - 0.38 * W, cy + 0.30 * H, cx - 0.02 * W, cy + 0.38 * H], fill=white)
+        def rot_rect(cx, cy, length, thick, ang):
+            ca, sa = math.cos(ang), math.sin(ang)
+            pts = []
+            for (u, v) in ((-length / 2, -thick / 2), (length / 2, -thick / 2), (length / 2, thick / 2),
+                           (-length / 2, thick / 2)):
+                pts.append((cx + u * ca - v * sa, cy + u * sa + v * ca))
+            return pts
+        # handle runs from the head (upper left) down to the lower right, 45 degrees
+        hx, hy = W * 0.40, H * 0.36
+        d.polygon(rot_rect(W * 0.60, H * 0.56, W * 0.56, W * 0.085, math.pi / 4), fill=white)
+        # head: a thick block perpendicular to the handle, with two collar bands
+        d.polygon(rot_rect(hx, hy, W * 0.46, W * 0.24, -math.pi / 4), fill=white)
+        for off in (-0.13, 0.13):
+            bx = hx + off * W * math.cos(-math.pi / 4)
+            by = hy + off * W * math.sin(-math.pi / 4)
+            d.polygon(rot_rect(bx, by, W * 0.035, W * 0.30, -math.pi / 4), fill=white)
+        # sound block
+        d.rounded_rectangle([W * 0.10, H * 0.80, W * 0.46, H * 0.90], radius=W * 0.02, fill=white)
     glyph_icon("judgment", 64, gavel, "graphics/icons/hullsys/tlc_summary_judgment.png")
 
     def protocols(d, W, H):

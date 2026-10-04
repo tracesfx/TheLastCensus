@@ -457,7 +457,7 @@ FACTION = {
         "tlc_assessor": "Assessor Circuit", "tlc_inspector": "Office of the Inspector-General",
         "trade": "Requisition Convoy", "tradeLiner": "Requisition Convoy", "tradeSmuggler": "Courier",
         "smallTrader": "Courier", "foodRelief": "Relief Convoy", "inspectionFleet": "Audit Detachment",
-        "taskForce": "Adjudication Flotilla", "battlestation": "Tallyhouse Defence Array",
+        "taskForce": "Adjudication Flotilla", "battlestation": "Tallyhouse Defense Array",
     },
 }
 
@@ -575,7 +575,7 @@ DESC = [
     ("tlc_tally", "SHIP", {
         "text1": "The Tally-class enumerator was the Bureau's census cutter: a light, quick hull built to carry a two-person enumeration team and their survey suite from colony to colony on a schedule that made no allowance for delay. Its outrigger pods once held sample lockers and a small press for registration seals. Most now hold capacitors.\n\nBureau Tallies fly without crews, running long circuits with the patience of a machine that has never been told to stop. In human hands they are nimble, cheap to keep, and faintly reproachful."}),
     ("tlc_assessor", "SHIP", {
-        "text1": "The Assessor-class audit cutter was the face the Domain Bureau of Colonial Assessment showed its public. The broad prow houses the assessment array, a sensor suite that can read a freighter's manifest through its hull plating, and the flanks are lined with armoured document vaults that Bureau crews called \"the drawers\".\n\nAssessors were built to arrive, inspect, levy and depart, and to win any argument that went beyond the levy. They mix ballistic and energy mounts with the Surcharge emitter, which turns an opponent's own weapons into a liability."}),
+        "text1": "The Assessor-class audit cutter was the face the Domain Bureau of Colonial Assessment showed its public. The broad prow houses the assessment array, a sensor suite that can read a freighter's manifest through its hull plating, and the flanks are lined with armored document vaults that Bureau crews called \"the drawers\".\n\nAssessors were built to arrive, inspect, levy and depart, and to win any argument that went beyond the levy. They mix ballistic and energy mounts with the Surcharge emitter, which turns an opponent's own weapons into a liability."}),
     ("tlc_magistrate", "SHIP", {
         "text1": "Where the Assessor assessed, the Magistrate adjudicated. These heavy cutters escorted audit circuits into colonies whose compliance was in doubt, and their arrival was itself a kind of verdict. The raised superstructure amidships, \"the bench\", holds a sealed hearing chamber where Bureau magistrates once heard appeals in person.\n\nThe bench is empty now. The spinal large mount, the broad shield arc and a cruiser-scale Surcharge emitter remain."}),
     ("tlc_exchequer", "SHIP", {
