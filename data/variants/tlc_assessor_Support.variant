@@ -1,0 +1,47 @@
+{
+    "displayName": "Support",
+    "fluxCapacitors": 8,
+    "fluxVents": 17,
+    "goalVariant": true,
+    "hullId": "tlc_assessor",
+    "hullMods": [
+        "targetingunit",
+        "heavyarmor"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "tlc_assessor_Support",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 002": "heavymauler",
+                "WS 003": "heavymauler"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 001": "tlc_injunction"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS 004": "harpoon",
+                "WS 005": "harpoon"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 006": "tlc_writ",
+                "WS 007": "tlc_writ"
+            }
+        }
+    ]
+}

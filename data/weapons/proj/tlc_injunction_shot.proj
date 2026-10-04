@@ -1,0 +1,26 @@
+{
+    "id": "tlc_injunction_shot",
+    "specClass": "projectile",
+    "spawnType": "BALLISTIC_AS_BEAM",
+    "collisionClass": "RAY",
+    "collisionClassByFighter": "RAY_FIGHTER",
+    "onHitEffect": "tlc.combat.TLCInjunctionOnHit",
+    "length": 60.0,
+    "width": 14.0,
+    "fadeTime": 0.25,
+    "fringeColor": [
+        40,
+        170,
+        120,
+        255
+    ],
+    "coreColor": [
+        220,
+        255,
+        235,
+        210
+    ],
+    "textureType": "ROUGH",
+    "textureScrollSpeed": -200.0,
+    "pixelsPerTexel": 1.0
+}

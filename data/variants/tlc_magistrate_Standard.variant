@@ -1,0 +1,62 @@
+{
+    "displayName": "Standard",
+    "fluxCapacitors": 13,
+    "fluxVents": 30,
+    "goalVariant": true,
+    "hullId": "tlc_magistrate",
+    "hullMods": [
+        "hardenedshieldemitter",
+        "targetingunit"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "tlc_magistrate_Standard",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 001": "tlc_foreclosure"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 002": "tlc_accrual",
+                "WS 003": "tlc_accrual"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 004": "tlc_injunction",
+                "WS 005": "tlc_injunction"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 006": "pilum"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 007": "pdlaser",
+                "WS 008": "pdlaser"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 009": "tlc_writ",
+                "WS 010": "tlc_writ"
+            }
+        }
+    ]
+}

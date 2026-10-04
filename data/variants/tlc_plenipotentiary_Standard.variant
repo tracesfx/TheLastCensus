@@ -1,0 +1,57 @@
+{
+    "displayName": "Inspector-General",
+    "fluxCapacitors": 30,
+    "fluxVents": 30,
+    "goalVariant": true,
+    "hullId": "tlc_plenipotentiary",
+    "hullMods": [
+        "hardenedshieldemitter",
+        "targetingunit",
+        "heavyarmor",
+        "reinforcedhull"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "tlc_plenipotentiary_Standard",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 001": "tlc_foreclosure"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 002": "tlc_injunction",
+                "WS 003": "tlc_injunction"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 004": "tlc_accrual",
+                "WS 005": "tlc_accrual"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 006": "tlc_writ",
+                "WS 007": "tlc_writ"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS 008": "tlc_subpoena",
+                "WS 009": "tlc_subpoena"
+            }
+        }
+    ]
+}

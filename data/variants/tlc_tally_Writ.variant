@@ -1,0 +1,38 @@
+{
+    "displayName": "Writ Carrier",
+    "fluxCapacitors": 10,
+    "fluxVents": 10,
+    "goalVariant": true,
+    "hullId": "tlc_tally",
+    "hullMods": [
+        "hardenedshieldemitter",
+        "unstable_injector"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "tlc_tally_Writ",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 001": "tlc_writ"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 003": "pdlaser",
+                "WS 004": "pdlaser"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 002": "tlc_subpoena"
+            }
+        }
+    ]
+}

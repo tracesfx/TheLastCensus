@@ -1,0 +1,2 @@
+name,id,tags,planetary,decivRemove,script,desc,icon,order
+Automated Administration,tlc_automated_admin,,,,tlc.campaign.TLCAutomatedAdminCondition,"Every office, berth and storeroom on $market is run by Bureau automata answering to a single administrative intelligence. Nothing is misfiled, nobody is bribed, and nothing is ever done early.",graphics/icons/markets/tlc_automated_admin.png,140

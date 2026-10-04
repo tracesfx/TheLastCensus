@@ -1,0 +1,76 @@
+{
+    "displayName": "Standard",
+    "fluxCapacitors": 36,
+    "fluxVents": 50,
+    "goalVariant": true,
+    "hullId": "tlc_exchequer",
+    "hullMods": [
+        "hardenedshieldemitter",
+        "targetingunit",
+        "heavyarmor"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "tlc_exchequer_Standard",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 001": "tlc_foreclosure",
+                "WS 002": "tlc_foreclosure"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 003": "hephag"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 004": "tlc_accrual",
+                "WS 005": "tlc_accrual",
+                "WS 006": "tlc_accrual",
+                "WS 007": "tlc_accrual"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 008": "tlc_injunction",
+                "WS 009": "tlc_injunction"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 010": "pilum",
+                "WS 011": "pilum"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 012": "pdlaser",
+                "WS 013": "pdlaser",
+                "WS 014": "pdlaser",
+                "WS 015": "pdlaser"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 016": "tlc_writ",
+                "WS 017": "tlc_writ"
+            }
+        }
+    ]
+}

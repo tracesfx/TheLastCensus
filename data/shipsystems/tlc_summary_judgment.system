@@ -1,0 +1,19 @@
+{
+    "id": "tlc_summary_judgment",
+    "type": "STAT_MOD",
+    "aiType": "CUSTOM",
+    "aiScript": "tlc.systems.TLCSummaryJudgmentAI",
+    "statsScript": "tlc.systems.TLCSummaryJudgmentStats",
+    "jitterUnderColor": [
+        255,
+        200,
+        110,
+        140
+    ],
+    "jitterUnderCopies": 10,
+    "jitterUnderMinRange": 0,
+    "jitterUnderRange": 8,
+    "jitterUnderRangeRadiusFraction": 0,
+    "useSound": "system_entropy",
+    "outOfUsesSound": "gun_out_of_ammo"
+}
