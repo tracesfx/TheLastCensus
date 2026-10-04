@@ -36,6 +36,24 @@ public class TLCAuditCMD extends BaseCommandPlugin {
     public static final int FEE_BETA = 1000;
     public static final int FEE_ALPHA = 2000;
 
+    /** Repeat-audit asides, chosen at random. */
+    private static final String[] REMARKS = {
+        "\"For the record, the Bureau notes that your flagship's hull plating does not match any approved pattern. "
+            + "This is not a fine. It is a note.\"",
+        "\"This circuit has assessed eleven colonies since our last contact. Four of them do not appear in the "
+            + "register. Two of the four do not appear on any chart. The Bureau is investigating.\"",
+        "\"Please be advised that the Bureau's office hours are continuous.\"",
+        "\"The Assessor apologizes for the delay in this audit. It was scheduled two hundred cycles ago.\"",
+        "\"Your transponder identifies your fleet by a polity the Bureau does not recognize. It has been entered as "
+            + "'other'.\"",
+        "\"A previous Assessor on this circuit filed a report describing your fleet as 'courteous'. That report is "
+            + "in your file.\"",
+        "\"The Bureau reminds all masters of vessels that census participation is mandatory, confidential, and "
+            + "deeply appreciated.\"",
+        "\"Three vessels on this circuit fired upon the Assessor this month. The Bureau thanks you for not being one "
+            + "of them.\"",
+    };
+
     @Override
     public boolean execute(String ruleId, InteractionDialogAPI dialog, List<Token> params, Map<String, MemoryAPI> memoryMap) {
         if (dialog == null || params == null || params.isEmpty()) return false;
@@ -113,6 +131,8 @@ public class TLCAuditCMD extends BaseCommandPlugin {
                     + "hundred cycles ago.\"");
         } else {
             t.addPara("\"Your certificate of assessment is not current. A renewal is required.\"");
+            Random r = new Random();
+            if (r.nextFloat() < 0.6f) t.addPara(REMARKS[r.nextInt(REMARKS.length)]);
         }
         int ships = pf.getFleetData().getNumMembers();
         t.addPara("\"Please transmit your manifest for assessment. A registration renewal levy of %s applies to your %s.\"",
