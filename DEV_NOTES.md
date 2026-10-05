@@ -106,12 +106,13 @@ Inhospitable, as in vanilla), and the Registrar audience needs the same.
   intel entry is added.
 * The hearing: the IG states her hypothesis: *if you can defeat me, the Domain is not standing behind me.*
   * **"Proceed."** The fleet turns hostile (no rep impact) and the battle begins.
-  * **"Not today."** The IG adjourns and waits in orbit at the Tallyhouse indefinitely. Interact with her fleet there
-    to reopen the hearing. Leaving the system before she reaches you has the same effect.
+  * **"Not today."** The IG adjourns and waits in orbit of the planet Docket in Assize, indefinitely. Interact with her
+    fleet there to reopen the hearing. Leaving the system before she reaches you has the same effect. The hearing never
+    pulls in stations or bystander fleets.
 * **Win** (the Plenipotentiary destroyed or disabled): finding filed, *Domain contact presumed lost*
   (`$tlc_igState = ruled`). The Plenipotentiary is **always recoverable**, and it is the only copy in the game. The
   rest of her fleet goes home. This unlocks ending A′.
-* **Lose or retreat:** the hearing is adjourned and she waits at the Tallyhouse for a rematch.
+* **Lose or retreat:** the hearing is adjourned and she waits at Docket for a rematch.
 * Needs audits enabled (LunaLib) to trigger.
 
 ### 4.2 The Dead Letter Office (minor secret)

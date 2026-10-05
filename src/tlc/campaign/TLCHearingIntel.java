@@ -79,7 +79,7 @@ public class TLCHearingIntel extends BaseIntelPlugin {
         if (TLCIds.IG_DISPATCHED.equals(s)) {
             info.addPara("The Inspector-General is coming to hear your testimony", initPad, tc, h, "Inspector-General");
         } else if (TLCIds.IG_WAITING.equals(s)) {
-            info.addPara("The Inspector-General holds session in orbit of Assize", initPad, tc, h, "Assize");
+            info.addPara("The Inspector-General holds session at Docket, in Assize", initPad, tc, h, "Docket");
         } else if (TLCIds.IG_RULED.equals(s)) {
             info.addPara("Finding: Domain contact presumed lost", initPad, tc, h, "presumed lost");
         } else {
@@ -98,8 +98,8 @@ public class TLCHearingIntel extends BaseIntelPlugin {
         if (TLCIds.IG_DISPATCHED.equals(s) || TLCIds.IG_REFERRED.equals(s)) {
             info.addPara("The Inspector-General's flagship has been dispatched to hear the matter in person.", opad);
         } else if (TLCIds.IG_WAITING.equals(s)) {
-            info.addPara("The hearing is adjourned. The Inspector-General is holding session in orbit of %s "
-                    + "and will hear your evidence when you present yourself.", opad, h, "Assize");
+            info.addPara("The hearing is adjourned. The Inspector-General is holding session in orbit of %s, in the Assize "
+                    + "system, and will hear your evidence when you present yourself.", opad, h, "Docket");
         } else if (TLCIds.IG_RULED.equals(s)) {
             info.addPara("The hearing is over. The Inspector-General tested the hypothesis in the only way it trusted, "
                     + "and you supplied the evidence. The finding, filed with the Registrar of Assize, reads: %s",

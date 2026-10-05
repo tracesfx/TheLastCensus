@@ -73,8 +73,8 @@ public class TLCHearingCMD extends BaseCommandPlugin {
     }
 
     private boolean defer(InteractionDialogAPI dialog, TextPanelAPI t) {
-        t.addPara("\"A continuance, then. The hearing is adjourned.\" The lens narrows. \"I will hold session in orbit of "
-                + "Assize. Present yourself when you are ready to give evidence. I have been patient for two hundred "
+        t.addPara("\"A continuance, then. The hearing is adjourned.\" The lens narrows. \"I will hold session at Docket. "
+                + "Present yourself when you are ready to give evidence. I have been patient for two hundred "
                 + "cycles; I can be patient a little longer.\"");
         if (dialog.getInteractionTarget() instanceof CampaignFleetAPI) {
             TLCInspectorGeneral.sendHomeToWait((CampaignFleetAPI) dialog.getInteractionTarget());

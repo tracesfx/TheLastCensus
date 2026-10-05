@@ -65,7 +65,7 @@ public final class TLCWorldGen {
         PlanetAPI star = system.initStar("tlc_assize_star", StarTypes.ORANGE, 520f, 340f);
         system.setLightColor(new Color(255, 232, 206));
 
-        PlanetAPI docket = system.addPlanet("tlc_docket", star, "Docket", "barren_castiron", 40f, 110f, 2400f, 64f);
+        PlanetAPI docket = system.addPlanet(TLCIds.ID_DOCKET, star, "Docket", "barren_castiron", 40f, 110f, 2400f, 64f);
         docket.setCustomDescriptionId(TLCIds.DESC_DOCKET);
 
         PlanetAPI abeyance = system.addPlanet("tlc_abeyance", star, "Abeyance", "gas_giant", 200f, 310f, 5600f, 240f);

@@ -927,7 +927,7 @@ else:
 # of one; everything that IS a registry id goes through TLCIds and is validated above.
 LITERAL_WHITELIST = {"tlc_audit", "tlc_inspector", "tlc_assessor", "tlc_census", "tlc_hearing", "tlc_relay",
                      "tlc_ledger_plugin", "tlc_surcharge_debuff", "tlc_injunction_debuff", "tlc_judgment_debuff",
-                     "tlc_assize_star", "tlc_docket", "tlc_abeyance", "tlc_assize_relay", "tlc_assize_buoy",
+                     "tlc_assize_star", "tlc_abeyance", "tlc_assize_relay", "tlc_assize_buoy",
                      "tlc_escrow", "tlc_gen", "tlc_envoi_star", "tlc_envoi_rock"}
 for p in glob.glob(mod("src", "**", "*.java"), recursive=True):
     with open(p, encoding="utf-8") as f:

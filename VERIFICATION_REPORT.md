@@ -126,7 +126,7 @@ validate.py: 0 error(s), 0 warning(s)
 | 13 | Numeric comparisons on missing memory in rules | All numeric/stage checks moved into Java condition commands (`stageIn`, `returnsDone`, `returnsPending`, `relayClear`, `active`) that default safely |
 | 14 | Inspector-General unable to travel home | **Found and fixed**: the fleet had `MEMORY_KEY_NO_JUMP`, which would strand it in the player's system; removed |
 | 15 | IG pursuit hijacked by other AI behaviour | **Found and fixed**: now sets `FLEET_BUSY`/`FLEET_SPECIAL_ACTION` exactly as vanilla hassles do |
-| 16 | IG endless chase after a lost hearing | Any non-winning battle adjourns the hearing and the IG waits at the Tallyhouse |
+| 16 | IG endless chase after a lost hearing | Any non-winning battle adjourns the hearing and the IG waits at Docket |
 | 17 | Recovered Plenipotentiary keeps the IG as captain | Vanilla recovery replaces non-AI captains (FleetEncounterContext ~1763), verified |
 | 18 | Debuffs stuck forever (source ship dies mid-effect) | All debuffs live in the ledger with timers and death checks; systems only *refresh* them |
 | 19 | Writ mutates shared stock variants | Stock or non-REFIT variants are cloned before tagging, as vanilla does after inflation; skipped in missions and sim |
@@ -144,13 +144,22 @@ save-format problems, and no concurrent-modification risks. It reported 9 issues
 |---|---|---|
 | 1 | SOFTLOCK: one saturation bombardment (Tallyhouse is size 4) or decivilization could destroy the Tallyhouse and freeze the quest; `ensurePeople` overrode the admin of a captured Tallyhouse | Market is story-critical and has `NO_DECIV_KEY` until the quest ends; the Registrar option works whoever owns the market; the admin is only set while the Bureau owns it |
 | 2 | IG pursuit set FLEET_IGNORES_OTHER_FLEETS, which likely also ignores the player, so it would never hail | Removed; pursuit now uses exactly the vanilla HasslePlayerScript flags |
-| 3 | Hearing at the Tallyhouse would pull the station into the battle | IG waits in orbit of the Assize star (3200 su); fleet carries a FIDConfigGen with `pullInStations/Allies/Enemies = false` (vanilla Remnant pattern) |
+| 3 | Hearing at the Tallyhouse would pull the station into the battle | IG waits at the planet Docket (≥2500 su from the Tallyhouse; the star was rejected on re-review because orbiting it would sit in the corona); fleet carries a FIDConfigGen with `pullInStations/Allies/Enemies = false` (vanilla Remnant pattern) |
 | 4 | `tlc_igBegin` lacked `unset $ignorePlayerCommRequests`, so vanilla greetingNoComms could block the hearing | Added; the IG comms no longer set the ignore flag |
 | 5 | Liens could re-settle on wrecks | Listener ignores hulks; processed wrecks are recorded and never accrue again |
 | 6 | An audit already in pursuit could still fire after certification, commission or closure | Rule guards on all three, plus the manager marks in-progress hassles complete; IG greeting acknowledges a closed audit |
 | 7 | Relay gang was only aggressive (pirate-friendly players could not fight it cleanly); unused listener kind; DESIGN claimed a respawn | Gang is made hostile with low rep impact; dead code removed; DESIGN corrected |
 | 8 | Per-frame allocations in the debuff and writ paths | Ship-indexed ordinal arrays, swap-remove list, mutable float holders: no allocation per frame |
 | 9 | Market never set survey level | `setSurveyLevel(FULL)` |
+
+### 5.3 Final re-review (after all fixes)
+Every file touched by the last round of fixes was re-read in full. One new defect was found and fixed: the
+Inspector-General's "wait" anchor was the Assize **star**, so `GO_TO_LOCATION`/`ORBIT_PASSIVE` would have parked her
+fleet inside the corona. She now holds session at the planet **Docket** (2400 su from the star, clear of the corona,
+and at least ~2500 su from the Tallyhouse). The hearing's config override still keeps stations and bystanders out of
+the fight. Nothing else was found: the hassle cleanup uses vanilla's own keys, the ledger's swap-remove iteration and
+wreck guards are correct, the rule guards read the `$global` keys the Java writes, and Tallyhouse protection is
+released when the quest completes. Final state: **build 0 errors / 0 warnings; validator 0 errors / 0 warnings.**
 
 ## 6. Known limitations and untested areas
 * **Not play-tested.** Fleet AI behaviour (Assessor routes, Surcharge/Summary Judgment AI timing), visual effects,

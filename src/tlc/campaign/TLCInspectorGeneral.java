@@ -33,7 +33,7 @@ import tlc.TLCIds;
 public final class TLCInspectorGeneral {
     private static final Logger log = Global.getLogger(TLCInspectorGeneral.class);
     private static final String REASON = "tlc_hearing";
-    private static final float WAIT_RADIUS = 3200f;
+    private static final float WAIT_RADIUS = 350f;
 
     private TLCInspectorGeneral() {
     }
@@ -108,15 +108,13 @@ public final class TLCInspectorGeneral {
     }
 
     /**
-     * Where the IG holds session: the Assize star, at a radius that keeps the hearing outside the Tallyhouse's
-     * station support range (the station must not join the hearing).
+     * Where the IG holds session: the planet Docket (2400 su from the star, well clear of the corona, and at least
+     * ~2500 su from the Tallyhouse, far outside its station support range). Falls back to the Tallyhouse.
      */
     private static SectorEntityToken waitAnchor() {
-        SectorEntityToken home = TLCMem.tallyhouse();
-        if (home != null && home.getStarSystem() != null && home.getStarSystem().getStar() != null) {
-            return home.getStarSystem().getStar();
-        }
-        return home;
+        SectorEntityToken docket = Global.getSector().getEntityById(TLCIds.ID_DOCKET);
+        if (docket != null) return docket;
+        return TLCMem.tallyhouse();
     }
 
     private static void ensureWaitingFleet() {
@@ -129,7 +127,7 @@ public final class TLCInspectorGeneral {
         anchor.getContainingLocation().addEntity(f);
         Vector2f p = Misc.getPointAtRadius(anchor.getLocation(), WAIT_RADIUS);
         f.setLocation(p.x, p.y);
-        f.addAssignment(FleetAssignment.ORBIT_PASSIVE, anchor, 1000000f, "holding session in orbit of Assize");
+        f.addAssignment(FleetAssignment.ORBIT_PASSIVE, anchor, 1000000f, "holding session at Docket");
         TLCHearingIntel intel = TLCHearingIntel.get();
         if (intel != null) intel.setFleet(f);
     }
@@ -143,8 +141,8 @@ public final class TLCInspectorGeneral {
         f.clearAssignments();
         SectorEntityToken anchor = waitAnchor();
         if (anchor != null) {
-            f.addAssignment(FleetAssignment.GO_TO_LOCATION, anchor, 200f, "returning to Assize");
-            f.addAssignment(FleetAssignment.ORBIT_PASSIVE, anchor, 1000000f, "holding session in orbit of Assize");
+            f.addAssignment(FleetAssignment.GO_TO_LOCATION, anchor, 200f, "returning to Docket");
+            f.addAssignment(FleetAssignment.ORBIT_PASSIVE, anchor, 1000000f, "holding session at Docket");
         }
         TLCMem.setString(TLCIds.MEM_IG_STATE, TLCIds.IG_WAITING);
         TLCHearingIntel intel = TLCHearingIntel.get();

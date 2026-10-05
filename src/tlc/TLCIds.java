@@ -80,6 +80,7 @@ public final class TLCIds {
     public static final String ID_TALLYHOUSE_MARKET = "tlc_tallyhouse_market";
     public static final String ID_RELAY_ENTITY = "tlc_envoi_relay";
     public static final String ID_DLO_ENTITY = "tlc_dead_letter_annex";
+    public static final String ID_DOCKET = "tlc_docket";
     public static final String ID_REGISTRAR = "tlc_registrar";
     public static final String ID_INSPECTOR = "tlc_inspector_general";
     public static final String TYPE_ASSESSOR_FLEET = "tlc_assessor";
