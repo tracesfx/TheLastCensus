@@ -1,0 +1,9 @@
+{
+    "masterVersionFile": "https://raw.githubusercontent.com/tracesfx/TheLastCensus/main/the_last_census.version",
+    "modName": "The Last Census",
+    "modVersion": {
+        "major": 1,
+        "minor": 0,
+        "patch": 0
+    }
+}

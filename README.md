@@ -41,3 +41,8 @@ layout; it has **not** been tested with Nexerelin's random-sector mode or with o
 
 ## Credits
 See `CREDITS.md`.
+
+## License
+
+MIT, see `LICENSE`. Vanilla Starsector assets referenced by the mod belong to Fractal Softworks (see `CREDITS.md`).
+Releases are on the [Releases](https://github.com/tracesfx/TheLastCensus/releases) page.
