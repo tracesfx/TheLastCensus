@@ -6,3 +6,10 @@ dist/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# dev notes (private)
+BALANCE.md
+DESIGN.md
+DEV_NOTES.md
+RECON_NOTES.md
+VERIFICATION_REPORT.md
