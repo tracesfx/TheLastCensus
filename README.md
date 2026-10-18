@@ -1,4 +1,5 @@
 # The Last Census
+<img width="1368" height="721" alt="download (20)" src="https://github.com/user-attachments/assets/85931595-2a97-4c26-abf9-524fb5be9c21" />
 
 *The Domain is gone. Its paperwork isn't.*
 
